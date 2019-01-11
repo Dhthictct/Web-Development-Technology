@@ -1,0 +1,10 @@
+﻿/* 样式内容 */  
+    paper {display:block;font-size:20px;line-height:160%;text-align:center}
+    author{display:block; font-size:16px;margin-top:5px;margin-bottom:5px}
+    address{display:block; font-size:16px; text-align:center}
+    abstract{display:block;  font-size:20px; font-weight:bold; font-style:italic;}
+    abstract#al{display:block; font-size:14px; font-weight:normal; font-style: normal; line-height:150%;}
+    keywords{display:block; font-size:20px; font-weight:bold;  font-style: italic;}
+    keywords#al{display:block;font-size:14px; font-weight:normal;font-style: normal; line-height:150%;}
+    head{display:block;font-size:20px; line-height:150%}
+    text{display:block; font-size:18px; text-align:left; text-indent:30pt;line-height:150%;}

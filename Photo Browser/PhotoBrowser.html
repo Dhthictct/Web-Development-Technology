@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>照片浏览器</title>
+    <link rel="stylesheet" href="css/viewer.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <style>
+        #ulimg {
+            width: 700px;
+            font-size: 0;
+            margin: 0 auto;
+        }
+            #ulimg li {
+                display: inline-block;
+                width: 32%;
+                margin-left: 1%;
+                padding-top: 1%;
+            }
+                #ulimg li img {
+                    width: 100%;
+                    height: 200px;
+                }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/viewer.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <h3 style="text-align:center">照片浏览器</h3>
+    <div class="col-sm-8 col-md-6">
+        <div class="docs-galley">
+            <ul class="docs-pictures clearfix" id="ulimg">
+                <li><img src="img/1.jpg" /></li>
+                <li><img src="img/2.jpg" /></li>
+                <li><img src="img/3.jpg" /></li>
+                <li><img src="img/4.jpg" /></li>
+                <li><img src="img/5.jpg" /></li>
+                <li><img src="img/6.jpg" /></li>
+                <li><img src="img/7.jpg" /></li>
+                <li><img src="img/8.jpg" /></li>
+                <li><img src="img/9.jpg" /></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

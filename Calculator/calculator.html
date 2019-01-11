@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>计算器</title>
+	<meta charset="utf-8" />
+    <style>
+        div{
+            margin:10%;
+        }
+        table{
+            border-radius:8px;
+            padding:2px;
+            border:3px solid black;
+        }
+        table td{
+            width:50px;
+            height:30px;
+            border-style:none;
+        } 
+        .txt{
+            padding:2%;
+            width:96%;
+            height:30px;
+            background:#d0d0d0;
+            border-radius:8px;
+            border-style:none;
+        }
+        .butt{
+            padding:2%;
+            width:98%;
+            height:30px;
+            background:#d0d0d0;
+            text-align:center;
+            border-radius:8px;
+            border-style:none;
+        }
+    </style>
+    <script>
+        var cal = "";
+        var tem = "";
+        var v = new Array("π", "C", "√", "←", "E", "tan", "atan", "(", ")", "+", "sin", "7", "8", "9", "-", "cos", "4", "5", "6", "*", "asin", "1", "2", "3", "/", "acos", "%", "0", ".", "=");
+        function getValue(e) {
+            for (i = 0; i < v.length; i++) {
+                if (e == "C") {
+                    cal = "";
+                    tem = "";
+                    document.getElementById("Result").value = "0";
+                    break;
+                } else if (e == "←") {
+                    var str = document.getElementById("Result").value;
+                    str = str.substring(0, str.length - 1);
+                    if (str == "") str = "0";
+                    cal = str;
+                    tem = str;
+                    document.getElementById("Result").value = str;
+                    break;
+                }
+                else if (e == "=") { Result.value = eval(cal); break; }
+                else if (e == "tan") { cal = cal + "Math.tan"; tem = tem + e; Result.value = tem; break; }
+                else if (e == "atan") { cal = cal + "Math.atan"; tem = tem + e; Result.value = tem; break; }
+                else if (e == "sin") { cal = cal + "Math.sin"; tem = tem + e; Result.value = tem; break; }
+                else if (e == "asin") { cal = cal + "Math.asin"; tem = tem + e; Result.value = tem; break; }
+                else if (e == "cos") { cal = cal + "Math.cos"; tem = tem + e; Result.value = tem; break; }
+                else if (e == "acos") { cal = cal + "Math.acos"; tem = tem + e; Result.value = tem; break; }
+                else if (e == "√") { cal = cal + "Math.sqrt"; tem = tem + e; Result.value = tem; break; }
+                else if (e == "π") { cal = cal + "Math.PI"; tem = tem + e; Result.value = tem; break; }
+                else if (e == "E") { cal = cal + "Math.E"; tem = tem + e; Result.value = tem; break; }
+                else if (e == "%") { cal = cal + "*0.01"; tem = tem + e; Result.value = tem; break; }
+                else { cal = cal + e; tem = tem + e; Result.value = tem; break;}
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div align="center">
+        <table border="1" width="20%">
+            <tr>
+                <td colspan="5">
+                    <input id="Result" type="text" value="" readonly="readonly" class="txt"/>
+                </td>
+            </tr>
+            <script>
+                k = -1;
+                for (i = 0; i < 6; i++) {
+                    document.write("<tr>");
+                    for (j = 0; j < 5; j++) {
+                        k++;
+                        p = v[k];
+                        document.write('<td>');
+                        document.write('<input class="butt" type="button" value="' + p + '" onclick="getValue(this.value);">');
+                        document.write("</td>");
+                    }
+                    document.write("</tr>");
+                }
+            </script>
+        </table>
+    </div>
+</body>
+</html>
