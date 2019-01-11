@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>时钟</title>
+	<meta charset="utf-8" />
+    <style>
+        
+    </style>
+</head>
+<body>
+    <canvas id="clock" width="1000" height="500">当前浏览器不支持canvas</canvas>
+    <script type="text/javascript">
+	document.getElementById("clock").width = document.documentElement.clientWidth;
+        document.getElementById("clock").height = document.documentElement.clientHeight;
+        var canvas = document.getElementById("clock");
+        var context = canvas.getContext("2d");
+        var r = canvas.height / 2.5;
+        context.translate(canvas.width/2, canvas.height/2);
+        //绘制表盘
+        function DrawClock() {
+            var cw = parseInt(canvas.width);
+            var ch = parseInt(canvas.height);
+            var r = parseInt(canvas.height / 2.5);
+            //开始一个新的绘制路径
+            context.beginPath();
+            //设置弧线的颜色
+            context.strokeStyle = "black";
+            for (var i = 0; i < 10; ++i) {
+                context.arc(0, 0, r + i, 0, Math.PI * 2, false);
+            }
+            //按照指定的路径绘制弧线
+            context.stroke();
+
+            var rad = 0;
+            context.fillStyle = "black";
+            // 绘制表盘时刻度
+            for (var i = 0; i < 12; i++) {
+                context.save();
+                rad = i * Math.PI / 6;
+                context.rotate(rad);
+                context.fillRect(r - 10, 0, 10, 5);
+                context.restore();
+            }
+            // 绘制表盘分刻度
+            for (var i = 0; i < 60; i++) {
+                context.save();
+                rad = i * Math.PI / 30;
+                context.rotate(rad);
+                context.fillRect(r - 10, 0, 5, 2);
+                context.restore();
+            }
+            // 绘制表盘文字
+            var angle, font, fontX, fontY;
+            for (var i = 0; i < 12; i++) {
+                angle = i * 30;
+                angle = angle * Math.PI / 180;
+                font = (i + 3 > 12) ? i + 3 - 12 : i + 3;
+                fontX = Math.round(Math.cos(angle) * (r - 30));
+                fontY = Math.round(Math.sin(angle) * (r - 30));
+                context.font = "bold 15px 微软雅黑";
+                context.fillText(font, fontX, fontY);
+            }
+        }
+        //绘制指针
+        function drawHand(rotate, width, height) {
+            context.save();
+            rotate = rotate * Math.PI / 180;
+            context.rotate(rotate);
+            context.fillRect(-10, 0, width, height);
+            context.restore();
+        }
+        //小于10的数字加前导零
+        function checktime(x) {
+            if (x < 10) {
+                x = "0" + x;
+            }
+            return x;
+        }
+        function setTime() {
+            today = new Date();
+            var hour = today.getHours();
+            var minute = today.getMinutes();
+            var second = today.getSeconds();
+            var hRotate, mRotate, sRotate;
+            // 计算时针角度并绘制图形
+            hRotate = (hour * 60 * 60 + minute * 60 + second) / 120 - 90;
+            drawHand(hRotate, r - 180, 5);
+            // 计算分针角度并绘制图形
+            mRotate = (minute * 60 + second) * 0.1 - 90;
+            drawHand(mRotate, r - 80, 4);
+            // 计算秒针角度并绘制图形
+            sRotate = second * 6 - 90;
+            drawHand(sRotate, r - 30, 2);
+            hour = checktime(hour);
+            minute = checktime(minute);
+            second = checktime(second);
+            var time = hour + ":" + minute + ":" + second;
+            context.font = "bold 25px Arial";
+            context.fillText(time, -50, canvas.height / 4);
+            thisyear = today.getFullYear();
+            thismonth = checktime(today.getMonth());
+            thisday = checktime(today.getDate());
+            var t = thisyear + "年" + thismonth + "月" + thisday + "日";
+            context.fillText(t, -100, canvas.height / 4 - 30);
+        }
+        //每秒执行一次
+        setInterval(function () {
+            context.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+            DrawClock();
+            setTime();
+        }, 1000);
+    </script>
+</body>
+</html>
